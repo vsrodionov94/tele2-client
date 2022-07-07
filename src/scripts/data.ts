@@ -1,22 +1,4 @@
-enum Cities {
-  None,
-  SPB,
-  Vladivostok,
-  Irkutsk,
-  Kazan,
-  Izhevsk,
-  NN,
-  Saratov,
-  Volgograd,
-  Another,
-};
-
-type TaskType = {
-  title: string;
-  text: string;
-  link?: string;
-  image: string;
-};
+import { TaskType } from './types';
 
 const SPB: Array<TaskType> = [
   {
@@ -1486,3 +1468,5 @@ const another: Array<TaskType> = [
     image: 'lectority',
   },
 ];
+
+export default [[], SPB, vladivostok, irkutsk, kazan, izhevsk, nn, saratov, volgograd, another];
