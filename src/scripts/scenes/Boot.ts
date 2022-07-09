@@ -31,7 +31,8 @@ export default class BootScene extends Phaser.Scene {
   private initUser(): void {
     if (process.env.DEV) {
       this.state.vkId = 7
-      this.checkUser();
+      //this.checkUser();
+      this.userReady = true;
     } else {
       bridge.send('VKWebAppGetUserInfo').then(data => {
         this.state.vkId = data.id;

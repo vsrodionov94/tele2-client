@@ -1,12 +1,11 @@
-import { Modals, State, Teams } from './types';
+import { Cities, Modals, State } from './types';
 
 const state: State = {
-  name: '',
   vkId: 0,
-  team: Teams.None,
-  attempts: 5,
-  currentPoints: 0,
-  modal: Modals.None,
+  currentDay: 0,
+  city: Cities.None,
+  deferred: [],
+  answered: []
 };
 
 export default state;
