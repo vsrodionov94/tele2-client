@@ -1,5 +1,9 @@
+import DeferrerScreen from '../components/DeferrerScreen';
+import Navigation from '../components/Navigation';
 import SetCityScreen from '../components/SetCityScreen';
-import { Cities, State } from '../types';
+import { Cities, Screens, State } from '../types';
+import TaskScreen from './../components/TaskScreen';
+import ListScreen from './../components/ListScreen';
 
 export default class Game extends Phaser.Scene {
   public state: State;
@@ -16,9 +20,27 @@ export default class Game extends Phaser.Scene {
     if (this.state.city === Cities.None) {
       console.log(1);
       new SetCityScreen(this);
+    } else {
+      if (this.state.currentScreen === Screens.CurrentTask) {
+        const checkAnswered = this.state.answered.some(el => el === this.state.currentDay);
+        const checkDeferrer = this.state.deferred.some(el => el === this.state.currentDay);
+  
+        if (checkAnswered) {
+          this.add.sprite(0, 0, 'task-done').setOrigin(0);
+        } else if (checkDeferrer) {
+          this.add.sprite(0, 0, 'task-deferrer').setOrigin(0);
+        } else {
+          new TaskScreen(this);
+        }
+      } else if (this.state.currentScreen === Screens.Deferrer) {
+        new DeferrerScreen(this);
+      } else if (this.state.currentScreen === Screens.DoneList) {
+        new ListScreen(this);
+      }
+      new Navigation(this);
     }
 
-    if (process.env.DEV) this.createDebugZone();
+    if (process.env.DEV && false) this.createDebugZone();
   }
 
   private createDebugZone(): void {

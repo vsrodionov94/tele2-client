@@ -57,11 +57,14 @@ type State = {
   city: Cities;
   deferred: Array<integer>;
   answered: Array<integer>;
+  currentScreen: Screens;
 };
 
-enum Modals {
+enum Screens {
   None,
-  Tutorial,
+  CurrentTask,
+  Deferrer,
+  DoneList
 };
 
 enum Fonts {
@@ -81,7 +84,7 @@ export {
   DeferTaskResponse,
   OpenListRequest,
   State,
-  Modals,
+  Screens,
   Fonts,
   Cities,
   TaskType,

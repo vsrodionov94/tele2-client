@@ -32,6 +32,9 @@ const taskPink = require('../../assets/images/task-pink.png');
 const tutorial1 = require('../../assets/images/tutorial-1.png');
 const tutorial2 = require('../../assets/images/tutorial-2.png');
 const tutorial3 = require('../../assets/images/tutorial-3.png');
+const blackPixel = require('../../assets/images/black-pixel.png');
+const taskDeferrer = require('../../assets/images/task-deferrer.png');
+const taskDone = require('../../assets/images/task-done.png');
 
 export default class Preload extends Phaser.Scene {
   public state: State;
@@ -82,6 +85,9 @@ export default class Preload extends Phaser.Scene {
     this.load.image('tutorial-1', tutorial1);
     this.load.image('tutorial-2', tutorial2);
     this.load.image('tutorial-3', tutorial3);
+    this.load.image('black-pixel', blackPixel);
+    this.load.image('task-deferrer', taskDeferrer);
+    this.load.image('task-done', taskDone);
   }
 
   public create(): void {
