@@ -3,6 +3,7 @@ import { Fonts, TaskType } from '../types';
 import Game from './../scenes/Game';
 import TaskData from '../data';
 import Utils from '../libs/Utils';
+import api from './../libs/Api';
 
 export default class DeferrerScreen {
   private scene: Game;
@@ -67,10 +68,14 @@ export default class DeferrerScreen {
     const y = this.windowHeight + this.scrollHeight + padding;
     const square = this.scene.add.sprite(x, y, 'pink-square');
     Utils.clickButton(this.scene, square, () => {
-      this.scene.state.deferred = this.scene.state.deferred.filter(el => el !== id);
-      this.scene.state.answered.push(id);
-      this.scene.scene.restart(this.scene.state);
+      api.answerTask({ vkId: this.scene.state.vkId, taskId: id }).then(res => {
+        if (res.error) return;
+        this.scene.state.deferred = this.scene.state.deferred.filter(el => el !== id);
+        this.scene.state.answered.push(id);
+        this.scene.scene.restart(this.scene.state);
+      });
     });
+    
     const text = this.scene.add.text(x + 30, y, dayData.title, {
       fontFamily: Fonts.Tele2DisplaySerif_Regular,
       wordWrap: { width: 450 }, 

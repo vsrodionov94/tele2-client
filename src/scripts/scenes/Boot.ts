@@ -30,9 +30,8 @@ export default class BootScene extends Phaser.Scene {
 
   private initUser(): void {
     if (process.env.DEV) {
-      this.state.vkId = 7
-      //this.checkUser();
-      this.userReady = true;
+      this.state.vkId = 9
+      this.checkUser();
     } else {
       bridge.send('VKWebAppGetUserInfo').then(data => {
         this.state.vkId = data.id;
@@ -44,11 +43,12 @@ export default class BootScene extends Phaser.Scene {
   private checkUser(): void {
     api.checkUser({ vkId: this.state.vkId })
       .then(data => {
+        console.log(data);
         this.state.currentDay = data.currentDay;
+        this.state.timeToNewDay = data.timeToNewDay * 1000;
         this.state.city = data.city;
         this.state.answered = data.answered;
         this.state.deferred = data.deferred;
-
         this.userReady = true;
       });
   }

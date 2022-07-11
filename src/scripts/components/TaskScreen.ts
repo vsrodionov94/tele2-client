@@ -2,6 +2,7 @@ import { Fonts } from '../types';
 import Game from './../scenes/Game';
 import data from './../data';
 import Utils from './../libs/Utils';
+import api from './../libs/Api';
 
 export default class TaskScreen {
   private scene: Game;
@@ -58,11 +59,17 @@ export default class TaskScreen {
 
   private onButtonClick(done: boolean) {
     if (done) {
-      this.scene.state.answered.push(this.scene.state.currentDay);
-      this.scene.scene.restart(this.scene.state);
+      api.answerTask({ vkId: this.scene.state.vkId, taskId: this.scene.state.currentDay }).then(res => {
+        if (res.error) return;
+        this.scene.state.answered.push(this.scene.state.currentDay);
+        this.scene.scene.restart(this.scene.state);
+      });
     } else {
-      this.scene.state.deferred.push(this.scene.state.currentDay);
-      this.scene.scene.restart(this.scene.state);
+      api.deferTask({ vkId: this.scene.state.vkId, taskId: this.scene.state.currentDay }).then(res => {
+        if (res.error) return;
+        this.scene.state.deferred.push(this.scene.state.currentDay);
+        this.scene.scene.restart(this.scene.state);
+      });
     }
   }
 

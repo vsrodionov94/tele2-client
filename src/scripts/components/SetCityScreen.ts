@@ -1,6 +1,7 @@
 import { Cities, Fonts } from '../types';
 import Game from './../scenes/Game';
 import Utils from './../libs/Utils';
+import api from './../libs/Api';
 
 const cityNames = ['', 'Санкт-Петербург', 'Владивосток', 'Иркутск', 'Казань', 'Ижевск', 'Нижний Новгород', 'Саратов', 'Волгоград', 'Я из другого города'];
 export default class SetCityScreen {
@@ -68,9 +69,13 @@ export default class SetCityScreen {
       this.openNextScreen(false);
     });
     Utils.clickButton(this.scene, this.yesButton, () => {
-      this.scene.state.city = this.selectedCity;
-      this.destroy();
-      this.scene.scene.restart(this.scene.state);
+      api.setCity({ vkId: this.scene.state.vkId, city: this.selectedCity }).then(res => {
+        if (!res.error) {
+          this.scene.state.currentDay = res.currentDay;
+          this.scene.state.city = this.selectedCity;
+          this.scene.scene.restart(this.scene.state);
+        }
+      });
     });
   }
 
@@ -97,5 +102,4 @@ export default class SetCityScreen {
     this.question.destroy();
     this.zones.forEach(el => el.destroy());
   }
-
 };

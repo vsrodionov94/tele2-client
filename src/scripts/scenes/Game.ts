@@ -4,10 +4,12 @@ import SetCityScreen from '../components/SetCityScreen';
 import { Cities, Screens, State } from '../types';
 import TaskScreen from './../components/TaskScreen';
 import ListScreen from './../components/ListScreen';
+import api from './../libs/Api';
 
 export default class Game extends Phaser.Scene {
   public state: State;
   private taskScreen: TaskScreen;
+  private newDay: boolean;
   
   constructor() {
     super('Game');
@@ -18,14 +20,14 @@ export default class Game extends Phaser.Scene {
   }
 
   public create(): void {
+    console.log(this.state);
     if (this.state.city === Cities.None) {
-      console.log(1);
       new SetCityScreen(this);
     } else {
       if (this.state.currentScreen === Screens.CurrentTask) {
         const checkAnswered = this.state.answered.some(el => el === this.state.currentDay);
         const checkDeferrer = this.state.deferred.some(el => el === this.state.currentDay);
-  
+        console.log(this.state.currentDay);
         if (checkAnswered) {
           this.add.sprite(0, 0, 'task-done').setOrigin(0);
         } else if (checkDeferrer) {
@@ -70,36 +72,38 @@ export default class Game extends Phaser.Scene {
 
   private updateTime(delta: number) {
     if (this.state.timeToNewDay <= 0) {
-      this.state.timeToNewDay = 86400000;
-      this.state.currentDay += 1;
-      this.scene.restart(this.state);
+      if (this.newDay) return;
+      this.newDay = true;
+      api.updateNewDay({ vkId: this.state.vkId }).then(res => {
+        this.state.timeToNewDay = res.timeToNewDay * 1000;
+        this.state.currentDay = res.currentDay;
+        this.scene.restart(this.state);
+      });
     }
-    this.state.timeToNewDay -= delta;
+    this.state.timeToNewDay = Math.round(this.state.timeToNewDay - delta);
   }
 
   public timer(num: number): string {
     let hours: number | string;
     let minutes: number | string;
-    let seconds: number | string;
   
     if (num > 3600) {
       hours = Math.floor(num / 3600);
       minutes = Math.floor((num % 3600) / 60);
-      seconds = Math.floor(num % 60);
     } else if (num > 60) {
-      hours = '';
+      hours = '00';
       minutes = Math.floor(num / 60);
-      seconds = Math.floor(num % 60);
     } else {
-      hours = '';
+      hours = '00';
       minutes = '00';
-      seconds = num;
     }
     
     hours = String(hours);
     minutes = String(minutes);
-  
-    if (hours.length !== 0) hours = hours + ':';
+
+    if (hours.length === 1) hours = '0' + hours + ':';
+    else hours = hours + ':';
+
     if (minutes.length === 1) minutes = '0' + minutes;
   
     let time: string = hours + minutes;

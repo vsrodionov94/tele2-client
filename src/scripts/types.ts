@@ -2,6 +2,7 @@ type CheckUserRequest = BasicRequest;
 type OpenListRequest = BasicRequest;
 
 type CheckUserResponse = {
+  timeToNewDay: number;
   currentDay: integer;
   city: Cities;
   deferred: Array<integer>;
@@ -23,12 +24,17 @@ type DeferTaskRequest = {
   taskId: integer;
 };
 
+type UpdateNewDayRequest = BasicRequest;
+type UpdateNewDayResponse = {
+  timeToNewDay: number;
+  currentDay: integer;
+};
 
-type SetCityResponse = BasicResponse;
+type SetCityResponse = { error: boolean, currentDay: number };
 type AnswerTaskResponse = BasicResponse;
 type DeferTaskResponse = BasicResponse;
 
-type BasicRequest = {   vkId: number };
+type BasicRequest = { vkId: number };
 type BasicResponse = { error: boolean };
 
 enum Cities {
@@ -89,4 +95,6 @@ export {
   Fonts,
   Cities,
   TaskType,
+  UpdateNewDayRequest,
+  UpdateNewDayResponse
 };

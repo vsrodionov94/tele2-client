@@ -8,6 +8,8 @@ import {
   AnswerTaskResponse,
   DeferTaskResponse,
   OpenListRequest,
+  UpdateNewDayRequest,
+  UpdateNewDayResponse,
 } from "../types";
 
 
@@ -61,6 +63,14 @@ class Api {
   
   public openList(data: OpenListRequest): Promise<void> {
     return fetch(`${this.url}/openList`, {
+      headers: this.headers,
+      method: "POST",
+      body: JSON.stringify(data),
+    }).then(this.handleResponseData);
+  }
+
+  public updateNewDay(data: UpdateNewDayRequest): Promise<UpdateNewDayResponse> {
+    return fetch(`${this.url}/updateNewDay`, {
       headers: this.headers,
       method: "POST",
       body: JSON.stringify(data),
