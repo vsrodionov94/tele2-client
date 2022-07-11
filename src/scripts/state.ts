@@ -7,6 +7,7 @@ const state: State = {
   deferred: [],
   answered: [],
   currentScreen: Screens.CurrentTask,
+  timeToNewDay: 86400000,
 };
 
 export default state;

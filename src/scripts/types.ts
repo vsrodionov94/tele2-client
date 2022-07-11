@@ -58,6 +58,7 @@ type State = {
   deferred: Array<integer>;
   answered: Array<integer>;
   currentScreen: Screens;
+  timeToNewDay: number;
 };
 
 enum Screens {

@@ -7,7 +7,8 @@ import ListScreen from './../components/ListScreen';
 
 export default class Game extends Phaser.Scene {
   public state: State;
-
+  private taskScreen: TaskScreen;
+  
   constructor() {
     super('Game');
   }
@@ -30,7 +31,7 @@ export default class Game extends Phaser.Scene {
         } else if (checkDeferrer) {
           this.add.sprite(0, 0, 'task-deferrer').setOrigin(0);
         } else {
-          new TaskScreen(this);
+          this.taskScreen = new TaskScreen(this);
         }
       } else if (this.state.currentScreen === Screens.Deferrer) {
         new DeferrerScreen(this);
@@ -60,5 +61,48 @@ export default class Game extends Phaser.Scene {
     const graphics: Phaser.GameObjects.Graphics = this.add.graphics();
     graphics.lineStyle(5, color);
     graphics.strokeRect(x - width / 2, y - height / 2, width, height);
+  }
+
+  public update(time: number, delta: number) {
+    this.updateTime(delta);
+    this.taskScreen?.update();
+  }
+
+  private updateTime(delta: number) {
+    if (this.state.timeToNewDay <= 0) {
+      this.state.timeToNewDay = 86400000;
+      this.state.currentDay += 1;
+      this.scene.restart(this.state);
+    }
+    this.state.timeToNewDay -= delta;
+  }
+
+  public timer(num: number): string {
+    let hours: number | string;
+    let minutes: number | string;
+    let seconds: number | string;
+  
+    if (num > 3600) {
+      hours = Math.floor(num / 3600);
+      minutes = Math.floor((num % 3600) / 60);
+      seconds = Math.floor(num % 60);
+    } else if (num > 60) {
+      hours = '';
+      minutes = Math.floor(num / 60);
+      seconds = Math.floor(num % 60);
+    } else {
+      hours = '';
+      minutes = '00';
+      seconds = num;
+    }
+    
+    hours = String(hours);
+    minutes = String(minutes);
+  
+    if (hours.length !== 0) hours = hours + ':';
+    if (minutes.length === 1) minutes = '0' + minutes;
+  
+    let time: string = hours + minutes;
+    return time;
   }
 };

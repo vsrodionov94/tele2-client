@@ -15,12 +15,12 @@ export default class Navigation {
 
   private create() {
     const { centerX, height } = this.scene.cameras.main;
-    this.scene.add.sprite(centerX, height, 'nav-bg').setOrigin(0.5, 1);
+    this.scene.add.sprite(centerX, height, 'nav-bg').setOrigin(0.5, 1).setDepth(1);
     const { currentScreen } = this.scene.state;
 
-    this.deferrerButton = this.scene.add.sprite(centerX - 180, height - 70, currentScreen !== Screens.Deferrer ? 'disable-deferrer' : 'active-deferrer');
-    this.currentButton = this.scene.add.sprite(centerX, height - 70, currentScreen !== Screens.CurrentTask ? 'disable-current' : 'active-current');
-    this.listButton = this.scene.add.sprite(centerX + 180, height - 70, currentScreen !== Screens.DoneList ? 'disable-list' : 'active-list');
+    this.deferrerButton = this.scene.add.sprite(centerX - 180, height - 70, currentScreen !== Screens.Deferrer ? 'disable-deferrer' : 'active-deferrer').setDepth(1);
+    this.currentButton = this.scene.add.sprite(centerX, height - 70, currentScreen !== Screens.CurrentTask ? 'disable-current' : 'active-current').setDepth(1);
+    this.listButton = this.scene.add.sprite(centerX + 180, height - 70, currentScreen !== Screens.DoneList ? 'disable-list' : 'active-list').setDepth(1);
 
     if (currentScreen !== Screens.Deferrer) {
       Utils.clickButton(this.scene, this.deferrerButton, () => {
