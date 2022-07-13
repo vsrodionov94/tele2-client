@@ -58,13 +58,13 @@ export default class ListScreen {
     const padding = 35;
     const x = 20;
     const y = this.windowHeight + this.scrollHeight + padding;
-    const square = this.scene.add.sprite(x, y, 'green-square');
 
     const text = this.scene.add.text(x + 30, y, dayData.title, {
       fontFamily: Fonts.Tele2DisplaySerif_Regular,
       wordWrap: { width: 450 }, 
       fontSize: '20px',
     });
+    const square = this.scene.add.sprite(x, text.getBounds().centerY, 'green-square');
 
     this.scrollHeight += text.displayHeight + padding;
     this.scrolling.bottom = this.scrollHeight;

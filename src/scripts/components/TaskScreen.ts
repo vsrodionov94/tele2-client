@@ -76,6 +76,8 @@ export default class TaskScreen {
   }
 
   public update() {
-    this.timer?.setText(this.scene.timer(this.scene.state.timeToNewDay / 1000));
+    if (this.timer && this.timer.active) {
+      this.timer?.setText(this.scene.timer(this.scene.state.timeToNewDay / 1000));
+    }
   }
 };
