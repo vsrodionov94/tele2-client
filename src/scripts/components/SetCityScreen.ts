@@ -15,10 +15,12 @@ export default class SetCityScreen {
   private cityText: Phaser.GameObjects.Text;
   private textBg: Phaser.GameObjects.Sprite;
   private question: Phaser.GameObjects.Sprite;
+  private texts: Phaser.GameObjects.Text[];
 
   constructor(scene: Game) {
     this.scene = scene;
     this.zones = [];
+    this.texts = [];
     this.createElements();
   }
 
@@ -27,30 +29,40 @@ export default class SetCityScreen {
     this.blurBg = this.scene.add.sprite(0, 0, 'city-2').setOrigin(0).setVisible(false);
     this.createButtons();
     this.createCityText();
-    this.zones.push(this.createZone(480, Cities.SPB));
-    this.zones.push(this.createZone(480 + 80, Cities.Vladivostok));
-    this.zones.push(this.createZone(480 + 80 * 2, Cities.Irkutsk));
-    this.zones.push(this.createZone(480 + 80 * 3, Cities.Kazan));
-    this.zones.push(this.createZone(480 + 80 * 4, Cities.Izhevsk));
-    this.zones.push(this.createZone(480 + 80 * 5, Cities.NN));
-    this.zones.push(this.createZone(480 + 80 * 6, Cities.Saratov));
-    this.zones.push(this.createZone(480 + 80 * 7, Cities.Volgograd));
-    this.zones.push(this.createZone(480 + 80 * 8, Cities.Another));
+    
+    const zone1 = this.createZone(495, Cities.SPB);
+    const zone2 = this.createZone(495 + 70, Cities.Vladivostok);
+    const zone3 = this.createZone(495 + 70 * 2, Cities.Irkutsk);
+    const zone4 = this.createZone(495 + 70 * 3, Cities.Kazan);
+    const zone5 = this.createZone(495 + 70 * 4, Cities.Izhevsk);
+    const zone6 = this.createZone(495 + 70 * 5, Cities.NN);
+    const zone7 = this.createZone(495 + 70 * 6, Cities.Saratov);
+    const zone8 = this.createZone(495 + 70 * 7, Cities.Volgograd);
+    const zone9 = this.createZone(495 + 70 * 8, Cities.Another);
+    this.zones.push(zone1.zone, zone2.zone, zone3.zone, zone4.zone, zone5.zone, zone6.zone, zone7.zone, zone8.zone, zone9.zone);
+    this.texts.push(zone1.text, zone2.text, zone3.text, zone4.text, zone5.text, zone6.text, zone7.text, zone8.text, zone9.text);
   }
   
-  private createZone(y: number, city: Cities): Phaser.GameObjects.Zone {
+  private createZone(y: number, city: Cities): { zone: Phaser.GameObjects.Zone, text: Phaser.GameObjects.Text } {
     const { centerX } = this.scene.cameras.main;
+    const text = this.scene.add.text(100 + (6 * (city - 1)), y, cityNames[city], {
+      fontFamily: Fonts.Tele2DisplaySerif_Regular,
+      wordWrap: { width: 450 }, 
+      fontSize: '39px',
+      color: '#fffefe',
+    }).setAngle(-5);
     const zone = this.scene.add.zone(centerX, y, 450, 50).setDropZone(undefined, () => {}).setAngle(-5);
     Utils.click(zone, () => {
       this.selectedCity = city;
       this.openNextScreen(true);
     });
-    return zone;
+    return { zone, text };
   }
 
   private openNextScreen(state: boolean): void {
     this.mainBg.setVisible(!state);
     this.zones.forEach(el => el.setVisible(!state));
+    this.texts.forEach(el => el.setVisible(!state));
     this.blurBg.setVisible(state);
     this.yesButton.setVisible(state);
     this.noButton.setVisible(state);
@@ -101,5 +113,6 @@ export default class SetCityScreen {
     this.textBg.destroy();
     this.question.destroy();
     this.zones.forEach(el => el.destroy());
+    this.texts.forEach(el => el.destroy());
   }
 };
