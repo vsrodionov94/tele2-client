@@ -20,14 +20,12 @@ export default class Game extends Phaser.Scene {
   }
 
   public create(): void {
-    console.log(this.state);
     if (this.state.city === Cities.None) {
       new SetCityScreen(this);
     } else {
       if (this.state.currentScreen === Screens.CurrentTask) {
         const checkAnswered = this.state.answered.some(el => el === this.state.currentDay);
         const checkDeferrer = this.state.deferred.some(el => el === this.state.currentDay);
-        console.log(this.state.currentDay);
         if (checkAnswered) {
           this.add.sprite(0, 0, 'task-done').setOrigin(0);
         } else if (checkDeferrer) {

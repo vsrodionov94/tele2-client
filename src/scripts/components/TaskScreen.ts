@@ -15,13 +15,15 @@ export default class TaskScreen {
 
   private create() {
     const { city, currentDay } = this.scene.state;
-
-    this.scene.add.sprite(0, 0, 'task-green').setOrigin(0);
+    const { centerX, centerY } = this.scene.cameras.main;
+    const dayData = data[city][currentDay];
+    if (!dayData) return;
+    this.scene.add.sprite(centerX, centerY, dayData.image);
+    this.scene.add.sprite(0, 0, currentDay % 2 === 0 ? 'task-green' : 'task-pink').setOrigin(0);
     this.scene.add.text(25, 220, 'ДЕНЬ ЛЕТА: ' + (44 + currentDay), {
       fontFamily: Fonts.Standardstencil,
       fontSize: '60px',
     }).setAngle(-5);
-    const dayData = data[city][currentDay];
     this.scene.add.text(30, 300, dayData.title, {
       fontFamily: Fonts.Standardstencil,
       fontSize: '35px',

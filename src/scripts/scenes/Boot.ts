@@ -43,7 +43,6 @@ export default class BootScene extends Phaser.Scene {
   private checkUser(): void {
     api.checkUser({ vkId: this.state.vkId })
       .then(data => {
-        console.log(data);
         this.state.currentDay = data.currentDay;
         this.state.timeToNewDay = data.timeToNewDay * 1000;
         this.state.city = data.city;
