@@ -31,14 +31,14 @@ export default class SetCityScreen {
     this.createCityText();
     
     const zone1 = this.createZone(495, Cities.SPB);
-    const zone2 = this.createZone(495 + 70, Cities.Vladivostok);
-    const zone3 = this.createZone(495 + 70 * 2, Cities.Irkutsk);
-    const zone4 = this.createZone(495 + 70 * 3, Cities.Kazan);
-    const zone5 = this.createZone(495 + 70 * 4, Cities.Izhevsk);
-    const zone6 = this.createZone(495 + 70 * 5, Cities.NN);
-    const zone7 = this.createZone(495 + 70 * 6, Cities.Saratov);
-    const zone8 = this.createZone(495 + 70 * 7, Cities.Volgograd);
-    const zone9 = this.createZone(495 + 70 * 8, Cities.Another);
+    const zone2 = this.createZone(495 + 69.5, Cities.Vladivostok);
+    const zone3 = this.createZone(495 + 69.5 * 2, Cities.Irkutsk);
+    const zone4 = this.createZone(495 + 69.5 * 3, Cities.Kazan);
+    const zone5 = this.createZone(495 + 69.5 * 4, Cities.Izhevsk);
+    const zone6 = this.createZone(495 + 69.5 * 5, Cities.NN);
+    const zone7 = this.createZone(495 + 69.5 * 6, Cities.Saratov);
+    const zone8 = this.createZone(495 + 69.5 * 7, Cities.Volgograd);
+    const zone9 = this.createZone(495 + 69.5 * 8, Cities.Another);
     this.zones.push(zone1.zone, zone2.zone, zone3.zone, zone4.zone, zone5.zone, zone6.zone, zone7.zone, zone8.zone, zone9.zone);
     this.texts.push(zone1.text, zone2.text, zone3.text, zone4.text, zone5.text, zone6.text, zone7.text, zone8.text, zone9.text);
   }
@@ -84,7 +84,7 @@ export default class SetCityScreen {
       api.setCity({ vkId: this.scene.state.vkId, city: this.selectedCity }).then(res => {
         if (!res.error) {
           this.scene.state.currentDay = res.currentDay;
-          this.scene.state.currentDay = res.timeToNewDay;
+          this.scene.state.timeToNewDay = res.timeToNewDay * 1000;
           this.scene.state.city = this.selectedCity;
           this.scene.scene.restart(this.scene.state);
         }
