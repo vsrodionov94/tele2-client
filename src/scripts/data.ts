@@ -772,7 +772,7 @@ const another: Array<TaskType> = [
   {
     title: 'ПРИГЛАСИТЬ ДРУГА ИЗ ДРУГОГО ГОРОДА В ГОСТИ',
     text: 'Как давно вы не виделись?',
-    image: 'gosti'
+    image: 'vgosti'
   },
   {
     title: 'СЪЕЗДИТЬ НА ШАШЛЫКИ ЗА ГОРОД',
