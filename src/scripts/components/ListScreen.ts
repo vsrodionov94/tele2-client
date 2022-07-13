@@ -43,13 +43,18 @@ export default class ListScreen {
   
   private create() {
     this.scene.add.sprite(0, 0, 'list-bg').setOrigin(0);
+    const { centerX, centerY } = this.scene.cameras.main;
     if (this.scene.state.answered.length === 0) {
-      const { centerX, centerY } = this.scene.cameras.main;
       this.scene.add.sprite(centerX, centerY + 100, 'empty-list-note');
     } else {
       this.scene.state.answered.forEach(element => {
         this.createTask(element);
       });
+
+      const y = this.windowHeight + this.scrollHeight + 50;
+      const button = this.scene.add.sprite(centerX - 40, y, 'story-button').setOrigin(0.5, 0);
+      this.scrollHeight += button.displayHeight + 50;
+      this.scrolling.bottom = this.scrollHeight;
     }
   }
 
