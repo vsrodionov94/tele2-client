@@ -34,6 +34,7 @@ export default class BootScene extends Phaser.Scene {
       this.checkUser();
     } else {
       bridge.send('VKWebAppGetUserInfo').then(data => {
+        bridge.send("VKWebAppAllowNotifications");
         this.state.vkId = data.id;
         this.checkUser();
       });
