@@ -84,6 +84,7 @@ export default class SetCityScreen {
       api.setCity({ vkId: this.scene.state.vkId, city: this.selectedCity }).then(res => {
         if (!res.error) {
           this.scene.state.currentDay = res.currentDay;
+          this.scene.state.currentDay = res.timeToNewDay;
           this.scene.state.city = this.selectedCity;
           this.scene.scene.restart(this.scene.state);
         }

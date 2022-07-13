@@ -30,7 +30,7 @@ type UpdateNewDayResponse = {
   currentDay: integer;
 };
 
-type SetCityResponse = { error: boolean, currentDay: number };
+type SetCityResponse = { error: boolean, currentDay: number, timeToNewDay: number };
 type AnswerTaskResponse = BasicResponse;
 type DeferTaskResponse = BasicResponse;
 
