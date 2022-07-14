@@ -6,7 +6,6 @@ import api from './../libs/Api';
 
 export default class TaskScreen {
   private scene: Game;
-  private timer: Phaser.GameObjects.Text;
 
   constructor(scene: Game) {
     this.scene = scene;
@@ -37,12 +36,6 @@ export default class TaskScreen {
       wordWrap: { width: 520 },
     }).setAngle(-5);
 
-    this.timer = this.scene.add.text(60 + 460, 585 + 30, '22:30', {
-      fontFamily: Fonts.Standardstencil,
-      fontSize: '70px',
-      color: '#ffffff',
-    }).setAngle(-5).setOrigin(0.5);
-
     if (dayData.link) {
       Utils.click(text, () => window.open(dayData.link, '_blank'));
     }
@@ -72,12 +65,6 @@ export default class TaskScreen {
         this.scene.state.deferred.push(this.scene.state.currentDay);
         this.scene.scene.restart(this.scene.state);
       });
-    }
-  }
-
-  public update() {
-    if (this.timer && this.timer.active) {
-      this.timer?.setText(this.scene.timer(this.scene.state.timeToNewDay / 1000));
     }
   }
 };

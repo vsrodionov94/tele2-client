@@ -1,7 +1,7 @@
 import DeferrerScreen from '../components/DeferrerScreen';
 import Navigation from '../components/Navigation';
 import SetCityScreen from '../components/SetCityScreen';
-import { Cities, Screens, State } from '../types';
+import { Cities, Fonts, Screens, State } from '../types';
 import TaskScreen from './../components/TaskScreen';
 import ListScreen from './../components/ListScreen';
 import api from './../libs/Api';
@@ -10,7 +10,8 @@ export default class Game extends Phaser.Scene {
   public state: State;
   private taskScreen: TaskScreen;
   private newDay: boolean;
-  
+  private timerText: Phaser.GameObjects.Text;
+
   constructor() {
     super('Game');
   }
@@ -33,6 +34,13 @@ export default class Game extends Phaser.Scene {
         } else {
           this.taskScreen = new TaskScreen(this);
         }
+
+        this.timerText = this.add.text(60 + 460, 585 + 30, '22:30', {
+          fontFamily: Fonts.Standardstencil,
+          fontSize: '70px',
+          color: '#ffffff',
+        }).setAngle(-5).setOrigin(0.5);
+
       } else if (this.state.currentScreen === Screens.Deferrer) {
         new DeferrerScreen(this);
       } else if (this.state.currentScreen === Screens.DoneList) {
@@ -65,7 +73,9 @@ export default class Game extends Phaser.Scene {
 
   public update(time: number, delta: number) {
     this.updateTime(delta);
-    this.taskScreen?.update();
+    if (this.timerText && this.timerText.active) {
+      this.timerText?.setText(this.timer(this.state.timeToNewDay / 1000));
+    }
   }
 
   private updateTime(delta: number) {
