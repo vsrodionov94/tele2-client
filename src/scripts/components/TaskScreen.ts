@@ -20,24 +20,24 @@ export default class TaskScreen {
     if (!dayData) return;
     this.scene.add.sprite(centerX, centerY, dayData.image);
     this.scene.add.sprite(0, 0, currentDay % 2 === 0 ? 'task-green' : 'task-pink').setOrigin(0);
-    this.scene.add.text(25, 220, 'ДЕНЬ ЛЕТА: ' + (44 + currentDay), {
+    this.scene.add.text(60 + 25, 220 + 30, 'ДЕНЬ ЛЕТА: ' + (44 + currentDay), {
       fontFamily: Fonts.Standardstencil,
       fontSize: '60px',
     }).setAngle(-5);
-    this.scene.add.text(30, 300, dayData.title, {
+    this.scene.add.text(60 + 30, 300 + 30, dayData.title, {
       fontFamily: Fonts.Standardstencil,
       fontSize: '35px',
       color: '#000000',
       wordWrap: { width: 520 },
     }).setAngle(-5);
-    const text = this.scene.add.text(50, 520, dayData.text, {
+    const text = this.scene.add.text(60 + 50, 520 + 30, dayData.text, {
       fontFamily: Fonts.Tele2DisplaySerif_Regular,
       fontSize: '25px',
       color: dayData.link ? '#ffffff' : '#000000',
       wordWrap: { width: 520 },
     }).setAngle(-5);
 
-    this.timer = this.scene.add.text(460, 585, '22:30', {
+    this.timer = this.scene.add.text(60 + 460, 585 + 30, '22:30', {
       fontFamily: Fonts.Standardstencil,
       fontSize: '70px',
       color: '#ffffff',

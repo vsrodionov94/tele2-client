@@ -20,7 +20,7 @@ window.onload = (): void => {
     let root: HTMLElement = document.querySelector('#root');
     let clientHeight: number = Math.round(document.body.clientHeight);
     let clientWidth: number = Math.round(document.body.clientWidth);
-    let canvasWidth: number = 591;
+    let canvasWidth: number = 720;
     let canvasHeight: number = 1280;
  
     let x: number = canvasWidth / gcd(canvasHeight, canvasWidth);

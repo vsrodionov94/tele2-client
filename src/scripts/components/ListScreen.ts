@@ -61,12 +61,12 @@ export default class ListScreen {
   private createTask(id: number) {
     const dayData = TaskData[this.scene.state.city][id];
     const padding = 35;
-    const x = 20;
+    const x = 70;
     const y = this.windowHeight + this.scrollHeight + padding;
 
     const text = this.scene.add.text(x + 30, y, dayData.title, {
       fontFamily: Fonts.Tele2DisplaySerif_Regular,
-      wordWrap: { width: 450 }, 
+      wordWrap: { width: 500 }, 
       fontSize: '20px',
     });
     const square = this.scene.add.sprite(x, text.getBounds().centerY, 'green-square');

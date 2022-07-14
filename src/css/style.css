@@ -33,7 +33,7 @@ body {
 }
 body::before {
   content: '';
-  background: #0D0E11;
+  background: #000000;
   background-size: cover;
   position: fixed;
   left: 0;
