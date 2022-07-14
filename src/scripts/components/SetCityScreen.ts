@@ -76,7 +76,7 @@ export default class SetCityScreen {
   private createButtons(): void {
     const { centerX, centerY } = this.scene.cameras.main;
     this.yesButton = this.scene.add.sprite(centerX, centerY + 250, 'yes-button').setVisible(false);
-    this.noButton = this.scene.add.sprite(centerX, centerY + 400, 'no-button').setVisible(false);
+    this.noButton = this.scene.add.sprite(centerX + 15, centerY + 400, 'no-button').setVisible(false);
     Utils.clickButton(this.scene, this.noButton, () => {
       this.openNextScreen(false);
     });

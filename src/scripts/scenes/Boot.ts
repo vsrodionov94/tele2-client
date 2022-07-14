@@ -29,8 +29,8 @@ export default class BootScene extends Phaser.Scene {
   }
 
   private initUser(): void {
-    if (process.env.DEV) {
-      this.state.vkId = 1255
+    if (process.env.DEV && process.env.TEST) {
+      this.state.vkId = 1255889
       this.checkUser();
     } else {
       bridge.send('VKWebAppGetUserInfo').then(data => {
@@ -52,6 +52,11 @@ export default class BootScene extends Phaser.Scene {
         this.state.city = data.city;
         this.state.answered = data.answered;
         this.state.deferred = data.deferred;
+        if (process.env.DEV) {
+          this.state.currentDay = 0;
+          this.state.answered = [];
+          this.state.deferred = [];
+        }
         this.userReady = true;
       });
   }

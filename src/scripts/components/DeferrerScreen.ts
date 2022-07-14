@@ -16,8 +16,8 @@ export default class DeferrerScreen {
   constructor(scene: Game) {
     this.scene = scene;
     this.scrollHeight = Number(this.scene.game.config.height);
-    this.windowHeight = 670;
-    this.windowWidth = 591;
+    this.windowHeight = 638;
+    this.windowWidth = 720;
     
     this.initScrolling();
     this.create();
@@ -25,7 +25,7 @@ export default class DeferrerScreen {
 
   private initScrolling(): void {
     this.height = this.scrollHeight + this.windowHeight - 150;
-    let y: number = this.scene.cameras.main.centerY - 165;
+    let y: number = this.scene.cameras.main.centerY - 135;
     const cameraOptions: IScrollingOptions = {
       x: 40,
       y: y,
@@ -57,6 +57,9 @@ export default class DeferrerScreen {
       this.scene.state.deferred.forEach(element => {
         this.createTask(element);
       });
+
+      this.scrollHeight += 100;
+      this.scrolling.bottom = this.scrollHeight;
     }
   }
 
@@ -64,13 +67,13 @@ export default class DeferrerScreen {
   private createTask(id: number) {
     const dayData = TaskData[this.scene.state.city][id];
     const padding = 35;
-    const x = 70;
+    const x = 50;
     const y = this.windowHeight + this.scrollHeight + padding;
 
     const text = this.scene.add.text(x + 30, y, dayData.title, {
       fontFamily: Fonts.Tele2DisplaySerif_Regular,
-      wordWrap: { width: 500 }, 
-      fontSize: '20px',
+      wordWrap: { width: 580 }, 
+      fontSize: '23px',
     });
 
     const square = this.scene.add.sprite(x, text.getBounds().centerY, 'pink-square');
