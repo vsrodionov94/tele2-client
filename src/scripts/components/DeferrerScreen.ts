@@ -16,7 +16,7 @@ export default class DeferrerScreen {
   constructor(scene: Game) {
     this.scene = scene;
     this.scrollHeight = Number(this.scene.game.config.height);
-    this.windowHeight = 670;
+    this.windowHeight = 638;
     this.windowWidth = 591;
     
     this.initScrolling();
@@ -25,7 +25,7 @@ export default class DeferrerScreen {
 
   private initScrolling(): void {
     this.height = this.scrollHeight + this.windowHeight - 150;
-    let y: number = this.scene.cameras.main.centerY - 165;
+    let y: number = this.scene.cameras.main.centerY - 135;
     const cameraOptions: IScrollingOptions = {
       x: 40,
       y: y,
@@ -57,6 +57,9 @@ export default class DeferrerScreen {
       this.scene.state.deferred.forEach(element => {
         this.createTask(element);
       });
+
+      this.scrollHeight += 100;
+      this.scrolling.bottom = this.scrollHeight;
     }
   }
 

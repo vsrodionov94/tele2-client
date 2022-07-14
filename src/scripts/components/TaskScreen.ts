@@ -54,17 +54,29 @@ export default class TaskScreen {
 
   private onButtonClick(done: boolean) {
     if (done) {
-      api.answerTask({ vkId: this.scene.state.vkId, taskId: this.scene.state.currentDay }).then(res => {
-        if (res.error) return;
+      if (process.env.DEV) {
         this.scene.state.answered.push(this.scene.state.currentDay);
+        this.scene.state.currentDay += 1;
         this.scene.scene.restart(this.scene.state);
-      });
+      } else {
+        api.answerTask({ vkId: this.scene.state.vkId, taskId: this.scene.state.currentDay }).then(res => {
+          if (res.error) return;
+          this.scene.state.answered.push(this.scene.state.currentDay);
+          this.scene.scene.restart(this.scene.state);
+        });
+      }
     } else {
-      api.deferTask({ vkId: this.scene.state.vkId, taskId: this.scene.state.currentDay }).then(res => {
-        if (res.error) return;
+      if (process.env.DEV) {
         this.scene.state.deferred.push(this.scene.state.currentDay);
+        this.scene.state.currentDay += 1;
         this.scene.scene.restart(this.scene.state);
-      });
+      } else {
+        api.deferTask({ vkId: this.scene.state.vkId, taskId: this.scene.state.currentDay }).then(res => {
+          if (res.error) return;
+          this.scene.state.deferred.push(this.scene.state.currentDay);
+          this.scene.scene.restart(this.scene.state);
+        });
+      }
     }
   }
 };

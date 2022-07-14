@@ -2,7 +2,6 @@ import TaskData from '../data';
 import Scrolling, { IScrollingOptions } from '../libs/Scrolling';
 import { Fonts, TaskType } from '../types';
 import Game from './../scenes/Game';
-import Utils from './../libs/Utils';
 
 export default class ListScreen {
   private scene: Game;
@@ -15,7 +14,7 @@ export default class ListScreen {
   constructor(scene: Game) {
     this.scene = scene;
     this.scrollHeight = Number(this.scene.game.config.height) - 50;
-    this.windowHeight = 670;
+    this.windowHeight = 638;
     this.windowWidth = 591;
     
     this.initScrolling();
@@ -24,7 +23,7 @@ export default class ListScreen {
 
   private initScrolling(): void {
     this.height = this.scrollHeight + this.windowHeight - 150;
-    let y: number = this.scene.cameras.main.centerY - 165;
+    let y: number = this.scene.cameras.main.centerY - 135;
     const cameraOptions: IScrollingOptions = {
       x: 40,
       y: y,
@@ -53,7 +52,7 @@ export default class ListScreen {
 
       const y = this.windowHeight + this.scrollHeight + 50;
       const button = this.scene.add.sprite(centerX - 40, y, 'story-button').setOrigin(0.5, 0);
-      this.scrollHeight += button.displayHeight + 50;
+      this.scrollHeight += button.displayHeight + 100;
       this.scrolling.bottom = this.scrollHeight;
     }
   }
