@@ -48,7 +48,7 @@ export default class Utils {
       button.increase = false;
       let counter: number = 0;
       let interval = scene.time.addEvent({ delay: 5, callback: () => {
-        if (button.scale > 0.9 && !button.increase) {
+        if (button.scale > 0.88 && !button.increase) {
           let scale: number = button.scale - 0.1;
           button.scale = Number(scale.toFixed(2));
         }

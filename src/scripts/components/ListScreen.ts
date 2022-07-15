@@ -65,7 +65,7 @@ export default class ListScreen {
 
     const text = this.scene.add.text(x + 30, y, dayData.title, {
       fontFamily: Fonts.Tele2DisplaySerif_Regular,
-      wordWrap: { width: 580 }, 
+      wordWrap: { width: 560 }, 
       fontSize: '23px',
     });
     const square = this.scene.add.sprite(x, text.getBounds().centerY, 'green-square');

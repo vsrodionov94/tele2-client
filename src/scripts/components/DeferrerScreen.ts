@@ -46,7 +46,13 @@ export default class DeferrerScreen {
     this.scene.add.sprite(0, 0, 'deferrer-bg').setOrigin(0);
     const { centerX, centerY } = this.scene.cameras.main;
     if (this.scene.state.deferred.length === 0) {
-      this.scene.add.sprite(centerX, centerY + 100, 'deferrer-empty');
+      const emptyString = 'У вас нет отложенных летних заданий.\n\nИ это классно!\nЗначит, вы проводите каждый день на максимум';
+      const text = this.scene.add.text(centerX, centerY + 100, emptyString, {
+        fontFamily: Fonts.Tele2DisplaySerif_Regular,
+        wordWrap: { width: 550 },
+        fontSize: '40px',
+        align: 'center'
+      }).setOrigin(0.5);
     } else {
       const padding = 35;
       const y = this.windowHeight + this.scrollHeight + padding;
@@ -72,7 +78,7 @@ export default class DeferrerScreen {
 
     const text = this.scene.add.text(x + 30, y, dayData.title, {
       fontFamily: Fonts.Tele2DisplaySerif_Regular,
-      wordWrap: { width: 580 }, 
+      wordWrap: { width: 560 }, 
       fontSize: '23px',
     });
 
