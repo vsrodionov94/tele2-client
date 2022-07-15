@@ -8,9 +8,10 @@ import api from './../libs/Api';
 
 export default class Game extends Phaser.Scene {
   public state: State;
-  private taskScreen: TaskScreen;
   private newDay: boolean;
   private timerText: Phaser.GameObjects.Text;
+  private listScreen: ListScreen;
+  private deferrerScreen: DeferrerScreen;
 
   constructor() {
     super('Game');
@@ -32,7 +33,7 @@ export default class Game extends Phaser.Scene {
         } else if (checkDeferrer) {
           this.add.sprite(0, 0, 'task-deferrer').setOrigin(0);
         } else {
-          this.taskScreen = new TaskScreen(this);
+          new TaskScreen(this);
         }
 
         this.timerText = this.add.text(60 + 460, 585 + 30, '22:30', {
@@ -42,9 +43,9 @@ export default class Game extends Phaser.Scene {
         }).setAngle(-5).setOrigin(0.5);
 
       } else if (this.state.currentScreen === Screens.Deferrer) {
-        new DeferrerScreen(this);
+        this.deferrerScreen = new DeferrerScreen(this);
       } else if (this.state.currentScreen === Screens.DoneList) {
-        new ListScreen(this);
+        this.listScreen = new ListScreen(this);
       }
       new Navigation(this);
     }
@@ -75,6 +76,14 @@ export default class Game extends Phaser.Scene {
     this.updateTime(delta);
     if (this.timerText && this.timerText.active) {
       this.timerText?.setText(this.timer(this.state.timeToNewDay / 1000));
+    }
+
+    if (this.listScreen) {
+      this.listScreen.update();
+    }
+
+    if (this.deferrerScreen) {
+      this.deferrerScreen.update();
     }
   }
 

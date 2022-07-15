@@ -10,6 +10,8 @@ export default class ListScreen {
   public windowHeight: number;
   public windowWidth: number;
   public scrolling: Scrolling;
+  private scroll: Phaser.GameObjects.Sprite;
+  private startScroll: number;
 
   constructor(scene: Game) {
     this.scene = scene;
@@ -54,7 +56,24 @@ export default class ListScreen {
       const button = this.scene.add.sprite(centerX - 40, y, 'story-button').setOrigin(0.5, 0);
       this.scrollHeight += button.displayHeight + 100;
       this.scrolling.bottom = this.scrollHeight;
+
+      if (this.scrollHeight - Number(this.scene.game.config.height) + 150 > this.windowHeight) {
+        this.startScroll = this.scrollHeight - this.scrolling.scrollY;
+        this.scene.add.sprite(680, centerY + 180, 'scroll-bg');
+        this.scroll = this.scene.add.sprite(680, centerY + 80, 'scroll');
+      }
     }
+  }
+
+  public update() {
+    if (!this.scroll) return;
+    const { centerY } = this.scene.cameras.main;
+    const delta = 1 - (this.scrollHeight - this.scrolling.scrollY) / this.startScroll;
+    const min = centerY + 80;
+    const max = centerY + 255;
+    const range = max - min;
+    const y = min + range * delta;
+    if (y != this.scroll.y) this.scroll.setY(y);
   }
 
   private createTask(id: number) {

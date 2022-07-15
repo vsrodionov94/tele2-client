@@ -126,6 +126,8 @@ const watermelon = require('../../assets/images/backgrounds/watermelon.png');
 const wink = require('../../assets/images/backgrounds/wink.png');
 const yoga2 = require('../../assets/images/backgrounds/yoga2.png');
 const yogaroof = require('../../assets/images/backgrounds/yogaroof.png');
+const scroll = require('../../assets/images/scroll.png');
+const scrollBg = require('../../assets/images/scroll-bg.png');
 export default class Preload extends Phaser.Scene {
   public state: State;
 
@@ -269,6 +271,8 @@ export default class Preload extends Phaser.Scene {
     this.load.image('wink', wink);
     this.load.image('yoga2', yoga2);
     this.load.image('yogaroof', yogaroof);
+    this.load.image('scroll', scroll);
+    this.load.image('scroll-bg', scrollBg);
   }
 
   public create(): void {
