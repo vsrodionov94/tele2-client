@@ -48,7 +48,7 @@ export default class DeferrerScreen {
     this.scene.add.sprite(0, 0, 'deferrer-bg').setOrigin(0);
     const { centerX, centerY } = this.scene.cameras.main;
     if (this.scene.state.deferred.length === 0) {
-      const emptyString = 'У вас нет отложенных летних заданий.\n\nИ это классно!\nЗначит, вы проводите каждый день на максимум';
+      const emptyString = 'У вас нет отложенных летних заданий\n\nИ это классно!\nЗначит, вы проводите каждый день на максимум';
       const text = this.scene.add.text(centerX, centerY + 100, emptyString, {
         fontFamily: Fonts.Tele2DisplaySerif_Regular,
         wordWrap: { width: 550 },
