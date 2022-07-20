@@ -37,6 +37,10 @@ export default class TaskScreen {
     }).setAngle(-5);
 
     if (dayData.link) {
+      const graphics = this.scene.add.graphics();
+      graphics.lineStyle(2, 0xffffff, 1);
+      graphics.lineBetween(text.getBottomLeft().x, text.getBottomLeft().y, text.getBottomRight().x, text.getBottomRight().y);
+
       Utils.click(text, () => window.open(dayData.link, '_blank'));
     }
 
