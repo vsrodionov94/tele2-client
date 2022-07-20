@@ -77,7 +77,7 @@ const kinoparkovka1 = require('../../assets/images/backgrounds/kinoparkovka1.png
 const kotocafe = require('../../assets/images/backgrounds/kotocafe.png');
 const krugobaikal = require('../../assets/images/backgrounds/krugobaikal.png');
 const lectority = require('../../assets/images/backgrounds/lectority.png');
-const literaturegirl = require('../../assets/images/backgrounds/literaturegirl.png');
+const lecturegirl = require('../../assets/images/backgrounds/lecturegirl.png');
 const literaturestairs = require('../../assets/images/backgrounds/literaturestairs.png');
 const mayak = require('../../assets/images/backgrounds/mayak.png');
 const mystic = require('../../assets/images/backgrounds/mystic.png');
@@ -222,7 +222,7 @@ export default class Preload extends Phaser.Scene {
     this.load.image('kotocafe', kotocafe);
     this.load.image('krugobaikal', krugobaikal);
     this.load.image('lectority', lectority);
-    this.load.image('literaturegirl', literaturegirl);
+    this.load.image('lecturegirl', lecturegirl);
     this.load.image('literaturestairs', literaturestairs);
     this.load.image('mayak', mayak);
     this.load.image('mystic', mystic);
