@@ -41,7 +41,14 @@ export default class TaskScreen {
       graphics.lineStyle(2, 0xffffff, 1);
       graphics.lineBetween(text.getBottomLeft().x, text.getBottomLeft().y, text.getBottomRight().x, text.getBottomRight().y);
 
-      Utils.click(text, () => window.open(dayData.link, '_blank'));
+      Utils.click(text, () => {
+        const a = document.createElement('a');
+        a.setAttribute('target', '_blank');
+        document.body.appendChild(a);
+        a.href = dayData.link;
+        a.click();
+        document.body.removeChild(a);
+      });
     }
 
     const doneButton = this.scene.add.sprite(this.scene.cameras.main.width + 50, 900, 'done-button').setOrigin(1, 0.5);
