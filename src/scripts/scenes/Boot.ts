@@ -29,7 +29,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   private initUser(): void {
-    if (process.env.DEV && process.env.TEST) {
+    if (process.env.TEST) {
       this.state.vkId = 1255889
       this.checkUser();
     } else {
@@ -52,6 +52,7 @@ export default class BootScene extends Phaser.Scene {
         this.state.city = data.city;
         this.state.answered = data.answered;
         this.state.deferred = data.deferred;
+        console.log(data.currentDay);
         if (process.env.DEV) {
           this.state.currentDay = 0;
           this.state.answered = [];
