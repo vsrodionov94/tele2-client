@@ -36,7 +36,13 @@ export default class Game extends Phaser.Scene {
           new TaskScreen(this);
         }
 
-        this.timerText = this.add.text(60 + 460, 585 + 30, '22:30', {
+        const text = this.add.text(60 + 460, 585 + 10, 'ДО НОВОГО ЗАДАНИЯ:', {
+          fontFamily: Fonts.Standardstencil,
+          fontSize: '20px',
+          color: '#ffffff',
+        }).setAngle(-5).setOrigin(0.5);
+
+        this.timerText = this.add.text(60 + 460, 585 + 60, '22:30', {
           fontFamily: Fonts.Standardstencil,
           fontSize: '70px',
           color: '#ffffff',
